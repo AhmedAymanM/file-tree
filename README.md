@@ -38,6 +38,7 @@ The project structure is as follows:
 ├── hooks // custom hooks used across the app
 ├── utils // utility & helper functions
 ├── types // common types used across the app
+├── schemas // common zod schemas used across the app
 ├── assets // static assets
 ```
 
