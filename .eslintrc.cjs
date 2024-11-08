@@ -5,6 +5,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
     'plugin:jsx-a11y/recommended',
     'prettier',
     'plugin:tailwindcss/recommended',
@@ -17,6 +19,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    '@typescript-eslint/no-unused-vars': 'off',
     'prettier/prettier': [
       'error',
       {
