@@ -42,7 +42,7 @@ export function App() {
             ))}
           </ul>
         </SidebarLayout>
-        <div className="m-4">{treeEntry?.data?.description}</div>
+          <EntryDetails item={selectedItem?.item} />
       </ContentLayout>
     </AppLayout>
   )
