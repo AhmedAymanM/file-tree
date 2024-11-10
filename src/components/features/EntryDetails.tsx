@@ -26,8 +26,8 @@ export function EntryDetails({ item }: EntryDetailsProps) {
   }
 
   if (
-    entry.status === STATUS.LOADING ||
-    (entry.status === STATUS.IDLE && !entry.data)
+    !entry.data &&
+    (entry.status === STATUS.LOADING || entry.status === STATUS.IDLE)
   ) {
     return (
       <Container>
@@ -81,3 +81,17 @@ const Placeholder = () => {
     </div>
   )
 }
+
+const EmptyState = () => {
+  return (
+    <Container>
+      <Message title=" No entry selected... 💔" className="my-auto">
+        Please select an entry 📝 from the{' '}
+        <span className="font-semibold">entries directory</span>, to view its
+        details.
+      </Message>
+    </Container>
+  )
+}
+
+EntryDetails.EmptyState = EmptyState
