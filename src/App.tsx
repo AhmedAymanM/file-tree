@@ -1,32 +1,35 @@
-import { useState } from 'react'
+import { useCallback, useId, useState } from 'react'
 
-import { useNodesTree } from './api/get-nodes-tree'
-import { useTreeEntry } from './api/get-tree-entry'
+import { useTreeNodes } from './api/get-tree-nodes'
+// import { useTreeEntry } from './api/get-tree-entry'
+import { TreeNodeItem } from './components/features/TreeNodeItem'
 
 export function App() {
-  const [count, setCount] = useState(0)
-  const nodesTree = useNodesTree()
-  const treeEntry = useTreeEntry('9e.A.2')
+  const treeNodes = useTreeNodes()
+  // const treeEntry = useTreeEntry('9e.A.2')
+  const [highlightedItem, setHighlightedItem] = useState<string>()
 
-  console.log({
-    nodesTreeData: nodesTree?.data,
-    treeEntryData: treeEntry?.data,
-  })
+  const id = useId()
+
+  const handleToggleHighlight = useCallback(
+    (id: string) => {
+      setHighlightedItem(id === highlightedItem ? undefined : id)
+    },
+    [highlightedItem]
+  )
 
   return (
-    <div className="bg-white-accent text-black-accent h-svh p-4 text-lg">
-      <h1 className="font-bold">Vite + React</h1>
-      <div>
-        <button
-          onClick={() => setCount((count) => count + 1)}
-          className="rounded"
-        >
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
+    <div className="h-svh p-4 text-lg">
+      <ul>
+        {treeNodes?.data?.map((node) => (
+          <TreeNodeItem
+            node={node}
+            key={node?.id ?? id + node.label}
+            onHighlight={handleToggleHighlight}
+            highlightedItem={highlightedItem}
+          />
+        ))}
+      </ul>
     </div>
   )
 }

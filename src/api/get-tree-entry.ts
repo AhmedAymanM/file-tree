@@ -14,9 +14,9 @@ export const getTreeEntry = async (id: string) => {
 }
 
 export const useTreeEntry = (id: string) => {
-  const memoizedGetNodesTree = useCallback(() => getTreeEntry(id), [id])
+  const memoizedGetTreeNodes = useCallback(() => getTreeEntry(id), [id])
 
   return useAsync<Awaited<ReturnType<typeof getTreeEntry>>>(
-    memoizedGetNodesTree
+    memoizedGetTreeNodes
   )
 }
