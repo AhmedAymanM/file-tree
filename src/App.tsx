@@ -6,7 +6,8 @@ import { AppLayout } from '@/components/layouts/app-layout'
 import { ContentLayout } from '@/components/layouts/content-layout'
 import { SidebarLayout } from '@/components/layouts/sidebar-layout'
 import { TreeNode } from '@/types/api'
-import { useTreeEntry } from '@/api/get-tree-entry'
+import { EntryDetails } from './components/features/EntryDetails'
+import { Message } from './components/ui/message'
 
 export function App() {
   const [selectedItem, setSelectedItem] = useState<{
@@ -14,7 +15,6 @@ export function App() {
     item: TreeNode
   }>()
   const treeNodes = useTreeNodes()
-  const treeEntry = useTreeEntry(selectedItem?.item?.id)
 
   const id = useId()
 
@@ -42,7 +42,15 @@ export function App() {
             ))}
           </ul>
         </SidebarLayout>
+        {selectedItem?.item ? (
           <EntryDetails item={selectedItem?.item} />
+        ) : (
+          <Message title=" No entry selected... 💔" className="my-auto">
+            Please select an entry 📝 from the{' '}
+            <span className="font-semibold">entries directory</span>, to view
+            its details.
+          </Message>
+        )}
       </ContentLayout>
     </AppLayout>
   )
