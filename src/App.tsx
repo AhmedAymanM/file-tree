@@ -1,35 +1,34 @@
 import { useCallback, useId, useState } from 'react'
 
-import { useTreeNodes } from './api/get-tree-nodes'
-// import { useTreeEntry } from './api/get-tree-entry'
-import { TreeNodeItem } from './components/features/TreeNodeItem'
+import { useTreeNodes } from '@/api/get-tree-nodes'
+import { TreeNodeItem } from '@/components/features/TreeNodeItem'
+import { TreeNode } from '@/types/api'
 
 export function App() {
+  const [selectedItem, setSelectedItem] = useState<{
+    id: string
+    item: TreeNode
+  }>()
   const treeNodes = useTreeNodes()
-  // const treeEntry = useTreeEntry('9e.A.2')
-  const [highlightedItem, setHighlightedItem] = useState<string>()
 
   const id = useId()
 
-  const handleToggleHighlight = useCallback(
-    (id: string) => {
-      setHighlightedItem(id === highlightedItem ? undefined : id)
-    },
-    [highlightedItem]
-  )
+  const handleSelectItem = useCallback((id: string, item: TreeNode) => {
+    setSelectedItem((prevItem) =>
+      id === prevItem?.id ? undefined : { id, item }
+    )
+  }, [])
 
   return (
-    <div className="h-svh p-4 text-lg">
-      <ul>
-        {treeNodes?.data?.map((node) => (
-          <TreeNodeItem
-            node={node}
-            key={node?.id ?? id + node.label}
-            onHighlight={handleToggleHighlight}
-            highlightedItem={highlightedItem}
-          />
-        ))}
-      </ul>
-    </div>
+          <ul className="flex flex-col gap-2">
+            {treeNodes?.data?.map((node) => (
+              <TreeNodeItem
+                node={node}
+                key={node?.id ?? id + node.label}
+                onSelectItem={handleSelectItem}
+                selectedItem={selectedItem?.id}
+              />
+            ))}
+          </ul>
   )
 }
