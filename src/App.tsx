@@ -1,13 +1,13 @@
 import { useCallback, useId, useState } from 'react'
 
 import { useTreeNodes } from '@/api/get-tree-nodes'
-import { TreeNodeItem } from '@/components/features/TreeNodeItem'
 import { AppLayout } from '@/components/layouts/app-layout'
 import { ContentLayout } from '@/components/layouts/content-layout'
 import { SidebarLayout } from '@/components/layouts/sidebar-layout'
-import { TreeNode } from '@/types/api'
-import { EntryDetails } from './components/features/EntryDetails'
-import { Message } from './components/ui/message'
+import { EntryDetails } from '@/components/features/EntryDetails'
+import { Message } from '@/components/ui/message'
+import { TreeNodeItem } from '@/components/features/TreeNodeItem'
+import type { TreeNode } from '@/types/api'
 
 export function App() {
   const [selectedItem, setSelectedItem] = useState<{
@@ -27,7 +27,7 @@ export function App() {
   return (
     <AppLayout>
       <ContentLayout className="flex flex-auto">
-        <SidebarLayout className="shrink-0 basis-56 p-4">
+        <SidebarLayout className="shrink-0 p-2 sm:basis-56 sm:p-4">
           <h3 className="mb-2 text-balance text-xl font-bold">
             Entries Directory
           </h3>
