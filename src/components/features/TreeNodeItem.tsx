@@ -1,3 +1,5 @@
+// TODO: use data-[] for highlighting active tree node
+
 import {
   useCallback,
   useState,
@@ -40,7 +42,6 @@ export function TreeNodeItem({
   const handleItemHover = useCallback(
     (e: MouseEvent<HTMLButtonElement> | FocusEvent<HTMLButtonElement>) => {
       e.stopPropagation()
-
       setIsHovered(true)
     },
     []
@@ -61,19 +62,20 @@ export function TreeNodeItem({
     <li
       className={cn(
         'flex flex-col gap-1.5 rounded-lg',
-        id === selectedItem && 'ring-primary/80 shadow-xl ring-1',
+        id === selectedItem &&
+          'ring-primary/80 dark:ring-primary/60 shadow-xl ring-1',
         isHovered &&
-          'ring-primary/30 shadow-sm ring-1 ring-offset-2 ring-offset-[#edeef0]'
+          'ring-primary/30 dark:ring-primary/40 shadow-sm ring-2 ring-offset-4 ring-offset-[#edeef0] dark:ring-offset-[#232c39]'
       )}
     >
       {isFile ? (
         <button
           onClick={handleSelectItem}
           className={cn(
-            'flex gap-1 px-2',
-            'rounded-lg',
-            isSelectedFile && 'bg-primary text-white shadow-md',
-            'hover:bg-primary/30 focus:bg-primary/30 hover:text-black hover:shadow-sm focus:text-black focus:shadow-sm'
+            'flex gap-1 rounded-lg px-2',
+            isSelectedFile &&
+              'bg-primary dark:bg-primary/80 text-white shadow-md',
+            'hover:bg-primary/30 dark:hover:bg-primary/65 focus:bg-primary/30 hover:text-black hover:shadow-sm focus:text-black focus:shadow-sm dark:hover:text-white dark:focus:text-white'
           )}
         >
           <span
@@ -87,16 +89,16 @@ export function TreeNodeItem({
       ) : (
         <button
           onClick={handleToggleFolder}
-          // Handle hover/focus states
           onMouseOver={handleItemHover}
           onFocus={handleItemHover}
           onMouseOut={handleItemBlur}
           onBlur={handleItemBlur}
           className={cn(
-            'flex gap-1 px-2',
-            'rounded-lg',
-            isSelectedFile && 'bg-primary text-white shadow-md',
-            'hover:bg-primary/30 focus:bg-primary/30 hover:text-black hover:shadow-sm focus:text-black focus:shadow-sm'
+            'flex gap-1 rounded-lg px-2',
+            isSelectedFile &&
+              'bg-primary dark:bg-primary/80 text-white shadow-md',
+
+            'dark:hover:bg-primary/65 hover:bg-primary/30 focus:bg-primary/30 hover:text-black hover:shadow-sm focus:text-black focus:shadow-sm dark:hover:text-white dark:focus:text-white'
           )}
         >
           <span

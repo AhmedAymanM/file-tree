@@ -27,8 +27,11 @@ export function App() {
     <AppLayout>
       <ContentLayout className="flex flex-auto">
         <SidebarLayout className="shrink-0 p-2 sm:basis-56 sm:p-4">
-          <h3 className="mb-2 text-balance text-xl font-bold">
-            Entries Directory
+          <h3 className="mb-4 text-pretty text-2xl font-bold">
+            <span className="text-3xl" role="img" aria-hidden="true">
+              🪴
+            </span>{' '}
+            Entries Tree
           </h3>
           <ul className="flex flex-col gap-2">
             {treeNodes?.data?.map((node) => (

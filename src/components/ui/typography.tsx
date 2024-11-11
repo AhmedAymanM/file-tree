@@ -29,7 +29,12 @@ export const Subtitle = <T extends React.ElementType>({
   const Component = as ?? 'p'
 
   return (
-    <Component className={cn('text-md font-medium text-black/80', className)}>
+    <Component
+      className={cn(
+        'text-md font-medium text-black/80 dark:text-white/85',
+        className
+      )}
+    >
       {children}
     </Component>
   )

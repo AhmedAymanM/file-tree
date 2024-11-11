@@ -15,6 +15,8 @@ export const Message = ({ title, children, className }: MessageProps) => (
     )}
   >
     <h2 className="text-xl font-bold">{title}</h2>
-    <p className="text-balance text-sm text-black/65">{children}</p>
+    <p className="text-balance text-sm text-black/65 dark:text-white/80">
+      {children}
+    </p>
   </div>
 )

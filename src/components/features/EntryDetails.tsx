@@ -47,7 +47,7 @@ export function EntryDetails({ item }: EntryDetailsProps) {
         By <span className="text-primary">{entry.data?.createdBy}</span> @{' '}
         <span className="tracking-tighter">{createdAt}</span>
       </Subtitle>
-      <p className="text-balance text-lg text-black/70">
+      <p className="text-balance text-lg text-black/70 dark:text-white/80">
         {entry?.data?.description}
       </p>
     </Container>
