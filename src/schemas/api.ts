@@ -2,12 +2,11 @@ import { z } from 'zod'
 
 import type { TreeNode } from '@/types/api'
 
-const treeNodeSchema: z.ZodType<TreeNode> = z
-  .union([
-    z.object({ id: z.string() }),
-    z.object({ children: z.lazy(() => treeNodeSchema.array()) }),
-  ])
-  .and(z.object({ label: z.string() }))
+const treeNodeSchema: z.ZodType<TreeNode> = z.object({
+  label: z.string(),
+  id: z.string(),
+  children: z.lazy(() => treeNodeSchema.array()).optional(),
+})
 
 export const treeNodesSchema = z.array(treeNodeSchema)
 

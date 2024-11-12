@@ -1,4 +1,4 @@
-import { useCallback, useId, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { useTreeNodes } from '@/api/get-tree-nodes'
 import { AppLayout } from '@/components/layouts/app-layout'
@@ -14,8 +14,6 @@ export function App() {
     item: TreeNode
   }>()
   const treeNodes = useTreeNodes()
-
-  const id = useId()
 
   const handleSelectItem = useCallback((id: string, item: TreeNode) => {
     setSelectedItem((prevItem) =>
@@ -37,7 +35,7 @@ export function App() {
             {treeNodes?.data?.map((node) => (
               <TreeNodeItem
                 node={node}
-                key={node?.id ?? id + node.label}
+                key={node?.id}
                 onSelectItem={handleSelectItem}
                 selectedItem={selectedItem?.id}
               />
