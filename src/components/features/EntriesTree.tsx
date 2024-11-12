@@ -38,7 +38,7 @@ export function EntriesTree({ onSelectItem, selectedItem }: EntriesTreeProps) {
   })
 
   return (
-    <SidebarLayout className="shrink-0 p-2 sm:basis-56 sm:p-4">
+    <SidebarLayout className="shrink-0 p-2 sm:basis-64 sm:p-4">
       <h3 className="mb-4 text-pretty text-2xl font-bold">
         <span className="text-3xl" role="img" aria-hidden="true">
           🪴

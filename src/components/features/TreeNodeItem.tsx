@@ -19,6 +19,7 @@ type TreeNodeItemProps = {
   draggedItemId: string | undefined
   currentDraggedOverId: string | undefined
   isDragging: boolean
+  isDraggingParent?: boolean
 }
 
 export function TreeNodeItem({
@@ -29,6 +30,7 @@ export function TreeNodeItem({
   draggedItemId,
   currentDraggedOverId,
   isDragging,
+  isDraggingParent,
 }: TreeNodeItemProps) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -71,7 +73,7 @@ export function TreeNodeItem({
           'ring-primary/80 dark:ring-primary/60 shadow-xl ring-1',
         isHovered &&
           'ring-primary/30 dark:ring-primary/40 shadow-sm ring-2 ring-offset-4 ring-offset-[#edeef0] dark:ring-offset-[#232c39]',
-        isDragged && 'opacity-50', // Add opacity style when dragging
+        isDraggingParent && 'pointer-events-none', // Add opacity style when dragging
         isDraggingOverIt && 'ring-2 ring-blue-400'
       )}
       data-id={node.id}
@@ -118,6 +120,7 @@ export function TreeNodeItem({
               draggedItemId={draggedItemId}
               isDragging={isDragging}
               currentDraggedOverId={currentDraggedOverId}
+              isDraggingParent={isDragged}
             />
           ))}
         </ul>
