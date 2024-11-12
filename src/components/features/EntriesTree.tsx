@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
+
 import type { TreeNode } from '@/types/api'
 import { SidebarLayout } from '@/components/layouts/sidebar-layout'
 import { TreeNodeItem } from '@/components/features/TreeNodeItem'
+import { Message } from '@/components//ui/message'
 import { useTreeNodes } from '@/api/get-tree-nodes'
 import { useDnD } from '@/hooks/useDnD'
 import { updateTreeNodePosition } from '@/utils/updateTreeNodePosition'
+import { STATUS } from '@/hooks/useAsync'
 
 type EntriesTreeProps = {
   onSelectItem: (id: string, item: TreeNode) => void
@@ -14,16 +17,19 @@ type EntriesTreeProps = {
   }
 }
 
-export function EntriesTree({ onSelectItem, selectedItem }: EntriesTreeProps) {
-  const OrigTreeNodes = useTreeNodes()
-  const [treeNodes, setTreeNodes] = useState<TreeNode[]>()
+function EntriesTree({
+  onSelectItem,
+  selectedItem,
+  treeNodes: treeNodesProp,
+}: EntriesTreeProps & { treeNodes: TreeNode[] }) {
+  const [treeNodes, setTreeNodes] = useState<TreeNode[]>(treeNodesProp)
 
   const onUpdateItemPosition = (
     draggedItemId: string,
     dropTargetId: string
   ) => {
     const updatedTreeNodes = updateTreeNodePosition({
-      dataTree: OrigTreeNodes!.data!,
+      dataTree: treeNodes,
       itemId: draggedItemId,
       targetId: dropTargetId,
     })
@@ -38,15 +44,9 @@ export function EntriesTree({ onSelectItem, selectedItem }: EntriesTreeProps) {
   })
 
   return (
-    <SidebarLayout className="shrink-0 p-2 sm:basis-64 sm:p-4">
-      <h3 className="mb-4 text-pretty text-2xl font-bold">
-        <span className="text-3xl" role="img" aria-hidden="true">
-          🪴
-        </span>{' '}
-        Entries Tree
-      </h3>
+    <Container>
       <ul className="flex flex-col gap-2">
-        {(treeNodes || OrigTreeNodes?.data)?.map((node) => (
+        {treeNodes.map((node) => (
           <TreeNodeItem
             node={node}
             key={node?.id}
@@ -59,6 +59,74 @@ export function EntriesTree({ onSelectItem, selectedItem }: EntriesTreeProps) {
           />
         ))}
       </ul>
+    </Container>
+  )
+}
+
+function EntriesTreeLoader({ onSelectItem, selectedItem }: EntriesTreeProps) {
+  const treeNodes = useTreeNodes()
+
+  if (treeNodes.status === STATUS.ERROR) {
+    return (
+      <Container>
+        <Message title="Something went wrong... 😔" className="my-auto">
+          Please try again!
+        </Message>
+      </Container>
+    )
+  }
+
+  if (
+    !treeNodes.data &&
+    (treeNodes.status === STATUS.LOADING || treeNodes.status === STATUS.IDLE)
+  ) {
+    return (
+      <Container>
+        <Placeholder />
+      </Container>
+    )
+  }
+
+  return (
+    <EntriesTree
+      onSelectItem={onSelectItem}
+      selectedItem={selectedItem}
+      treeNodes={treeNodes.data!}
+    />
+  )
+}
+
+const Container = ({ children }: { children: ReactNode }) => {
+  return (
+    <SidebarLayout className="shrink-0 p-2 sm:basis-64 sm:p-4">
+      <h3 className="mb-4 text-pretty text-2xl font-bold">
+        <span className="text-3xl" role="img" aria-hidden="true">
+          🪴
+        </span>{' '}
+        Entries Tree
+      </h3>
+      {children}
     </SidebarLayout>
   )
 }
+
+const Placeholder = () => {
+  return (
+    <div className="px-4 sm:px-6 lg:px-8">
+      <div className="animate-pulse">
+        <div className="my-2 h-4 rounded bg-gray-200" />
+        <div className="my-2 h-4 rounded bg-gray-200" />
+        <div className="my-2 h-4 rounded bg-gray-200" />
+        <div className="my-2 h-4 rounded bg-gray-200" />
+        <div className="my-2 h-4 rounded bg-gray-200" />
+        <div className="my-2 h-4 rounded bg-gray-200" />
+        <div className="my-2 h-4 rounded bg-gray-200" />
+        <div className="my-2 h-4 rounded bg-gray-200" />
+        <div className="my-2 h-4 rounded bg-gray-200" />
+        <div className="my-2 h-4 rounded bg-gray-200" />
+      </div>
+    </div>
+  )
+}
+
+export { EntriesTreeLoader as EntriesTree }

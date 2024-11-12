@@ -15,7 +15,6 @@ export function EntryDetails({ item }: EntryDetailsProps) {
   const entry = useTreeEntry(item.id!)
 
   if (entry.status === STATUS.ERROR) {
-    console.log({ error: entry.error })
     return (
       <Container>
         <Message title="Something went wrong... 😔" className="my-auto">
