@@ -31,15 +31,16 @@ The project structure is as follows:
 ```
 ├── main.tsx // entry point for the app
 ├── App.tsx // main app component in larger projects this is probably folder of all routes
+├── api // api related functions
 ├── components // feature & ui components
 │   ├── features // feature specific components
 │   ├── layouts // common shared layouts
 │   ├── ui // common shared ui components
 ├── hooks // custom hooks used across the app
 ├── utils // utility & helper functions
+├── testing // tests related configurations
 ├── types // common types used across the app
 ├── schemas // common zod schemas used across the app
-├── assets // static assets
 ```
 
 tests of different components are collected inside `/__tests__` folder of each
