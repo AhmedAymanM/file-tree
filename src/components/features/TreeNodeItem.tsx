@@ -69,12 +69,12 @@ export function TreeNodeItem({
       {...dndBindings}
       className={cn(
         'm-1 flex flex-col gap-1.5 rounded-lg',
+        isDraggingOverIt && 'ring-2 ring-blue-400',
         node.id === selectedItem &&
           'ring-primary/80 dark:ring-primary/60 shadow-xl ring-1',
         isHovered &&
           'ring-primary/30 dark:ring-primary/40 shadow-sm ring-2 ring-offset-4 ring-offset-[#edeef0] dark:ring-offset-[#232c39]',
-        isDraggingParent && 'pointer-events-none', // Add opacity style when dragging
-        isDraggingOverIt && 'ring-2 ring-blue-400'
+        isDraggingParent && 'pointer-events-none' // Add opacity style when dragging
       )}
       data-id={node.id}
     >
