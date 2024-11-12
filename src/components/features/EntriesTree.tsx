@@ -8,6 +8,7 @@ import { useTreeNodes } from '@/api/get-tree-nodes'
 import { useDnD } from '@/hooks/useDnD'
 import { updateTreeNodePosition } from '@/utils/updateTreeNodePosition'
 import { STATUS } from '@/hooks/useAsync'
+import { Subtitle } from '../ui/typography'
 
 type EntriesTreeProps = {
   onSelectItem: (id: string, item: TreeNode) => void
@@ -59,6 +60,10 @@ function EntriesTree({
           />
         ))}
       </ul>
+      <p className="mt-auto text-balance p-1 text-center text-sm font-medium text-black/60 dark:text-white/70">
+        Drag and drop entries to reorder them!{' '}
+        <span className="text-white">😉</span>
+      </p>
     </Container>
   )
 }
@@ -98,7 +103,7 @@ function EntriesTreeLoader({ onSelectItem, selectedItem }: EntriesTreeProps) {
 
 const Container = ({ children }: { children: ReactNode }) => {
   return (
-    <SidebarLayout className="shrink-0 p-2 sm:basis-64 sm:p-4">
+    <SidebarLayout className="flex shrink-0 flex-col p-2 sm:basis-64 sm:p-4">
       <h3 className="mb-4 text-pretty text-2xl font-bold">
         <span className="text-3xl" role="img" aria-hidden="true">
           🪴
