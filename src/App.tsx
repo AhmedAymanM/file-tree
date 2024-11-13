@@ -3,8 +3,8 @@ import { useCallback, useState } from 'react'
 import { AppLayout } from '@/components/layouts/app-layout'
 import { ContentLayout } from '@/components/layouts/content-layout'
 import { EntryDetails } from '@/components/features/EntryDetails'
+import { EntriesTree } from '@/components/features/EntriesTree'
 import type { TreeNode } from '@/types/api'
-import { EntriesTree } from './components/features/ENTRIESTree'
 
 export function App() {
   const [selectedItem, setSelectedItem] = useState<{
