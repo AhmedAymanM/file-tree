@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode, useCallback, useState } from 'react'
 
 import type { TreeNode } from '@/types/api'
 import { SidebarLayout } from '@/components/layouts/sidebar-layout'
@@ -25,23 +25,21 @@ function EntriesTree({
 }: EntriesTreeProps & { treeNodes: TreeNode[] }) {
   const [treeNodes, setTreeNodes] = useState<TreeNode[]>(treeNodesProp)
 
-  const onUpdateItemPosition = (
-    draggedItemId: string,
-    dropTargetId: string
-  ) => {
-    const updatedTreeNodes = updateTreeNodePosition({
-      dataTree: treeNodes,
-      itemId: draggedItemId,
-      targetId: dropTargetId,
-    })
-
-    console.log({ updatedTreeNodes })
-    setTreeNodes(updatedTreeNodes)
-    return updatedTreeNodes
-  }
+  const onUpdateItemPosition = useCallback(
+    (draggedItemId: string, dropTargetId: string) => {
+      const updatedTreeNodes = updateTreeNodePosition({
+        dataTree: treeNodes,
+        itemId: draggedItemId,
+        targetId: dropTargetId,
+      })
+      console.log({ updatedTreeNodes })
+      setTreeNodes(updatedTreeNodes)
+    },
+    [treeNodes]
+  )
 
   const { getDndBindings, ...state } = useDnD({
-    onUpdateItemPosition,
+    onDrop: onUpdateItemPosition,
   })
 
   return (

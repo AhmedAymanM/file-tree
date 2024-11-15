@@ -67,9 +67,9 @@ function reducer(state: State, action: Action) {
 }
 
 export function useDnD({
-  onUpdateItemPosition,
+  onDrop,
 }: {
-  onUpdateItemPosition?: (draggedItemId: string, dropTargetId: string) => void
+  onDrop?: (draggedItemId: string, dropTargetId: string) => void
 }) {
   const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -95,10 +95,10 @@ export function useDnD({
 
       dispatch({ type: ActionTypes.drop_item, id })
       if (state.draggedItemId && state.draggedItemId !== id) {
-        onUpdateItemPosition?.(state.draggedItemId, id)
+        onDrop?.(state.draggedItemId, id)
       }
     },
-    [onUpdateItemPosition, state.draggedItemId]
+    [onDrop, state.draggedItemId]
   )
 
   // README: we should have some mechanism to prevent overriding key bindings
