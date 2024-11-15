@@ -39,7 +39,7 @@ const findAndRemoveSubtree = (
     // If the current node has children, search recursively
     if (node.children) {
       const [removedNode, updatedChildren] = findAndRemoveSubtree(
-        node.children!,
+        node.children,
         nodeId
       )
       if (removedNode) {

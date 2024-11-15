@@ -15,7 +15,7 @@ export const Heading = <T extends React.ElementType>({
   const Component = as ?? 'h2'
 
   return (
-    <Component className={cn('text-primary text-3xl font-black', className)}>
+    <Component className={cn('text-3xl font-black text-primary', className)}>
       {children}
     </Component>
   )

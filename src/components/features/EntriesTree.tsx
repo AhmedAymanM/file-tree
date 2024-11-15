@@ -27,13 +27,15 @@ function EntriesTree({
 
   const onUpdateItemPosition = useCallback(
     (draggedItemId: string, dropTargetId: string) => {
-      const updatedTreeNodes = updateTreeNodePosition({
-        dataTree: treeNodes,
-        itemId: draggedItemId,
-        targetId: dropTargetId,
-      })
-      console.log({ updatedTreeNodes })
-      setTreeNodes(updatedTreeNodes)
+      if (confirm('Confirm drop item here?')) {
+        const updatedTreeNodes = updateTreeNodePosition({
+          dataTree: treeNodes,
+          itemId: draggedItemId,
+          targetId: dropTargetId,
+        })
+        console.log({ updatedTreeNodes })
+        setTreeNodes(updatedTreeNodes)
+      }
     },
     [treeNodes]
   )
