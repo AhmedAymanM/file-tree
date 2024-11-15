@@ -71,11 +71,13 @@ export function TreeNodeItem({
         'm-1 flex flex-col gap-1.5 rounded-lg',
         isDraggingOverIt && 'ring-2 ring-blue-400',
         node.id === selectedItem &&
-          'ring-primary/80 dark:ring-primary/60 shadow-xl ring-1',
+          'shadow-xl ring-1 ring-primary/80 dark:ring-primary/60',
+        'ring-primary/30 ring-offset-4 ring-offset-[#edeef0] has-[>ul>li[data-selected]]:ring-2 dark:ring-primary/40 dark:ring-offset-[#232c39]',
         isHovered &&
-          'ring-primary/30 dark:ring-primary/40 shadow-sm ring-2 ring-offset-4 ring-offset-[#edeef0] dark:ring-offset-[#232c39]',
+          'shadow-sm ring-2 ring-primary/20 ring-offset-4 ring-offset-[#edeef0] dark:ring-primary/40 dark:ring-offset-[#232c39]',
         isDraggingParent && 'pointer-events-none' // Add opacity style when dragging
       )}
+      {...(isItemSelected ? { 'data-selected': true } : undefined)}
       data-id={node.id}
     >
       {isFile ? (
@@ -138,8 +140,8 @@ const ItemTitleButton = ({
   return (
     <button
       className={cn(
-        isItemSelected && 'bg-primary dark:bg-primary/80 text-white shadow-md',
-        'hover:bg-primary/30 dark:hover:bg-primary/65 focus:bg-primary/30 flex gap-1 rounded-lg px-2 hover:text-black hover:shadow-sm focus:text-black focus:shadow-sm dark:hover:text-white dark:focus:text-white'
+        isItemSelected && 'bg-primary text-white shadow-md dark:bg-primary/80',
+        'flex gap-1 rounded-lg px-2 hover:bg-primary/30 hover:text-black hover:shadow-sm focus:bg-primary/30 focus:text-black focus:shadow-sm dark:hover:bg-primary/65 dark:hover:text-white dark:focus:text-white'
       )}
       {...props}
     />
