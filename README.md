@@ -50,13 +50,6 @@ relevant directory (like components, hooks, utils, etc.)
 
 - suggested improvements are left across the code as `README:` comments
 
-# Known Issues
-
-- You can't drag and drop leaf nodes to the root tree (i.e. outside a
-  folder)
-- selected parent in tree is not highlighted but it should be toggled open,
-  might do it later if I have time
-
 ## Useful Scripts
 
 In the project directory, you can run:

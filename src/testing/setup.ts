@@ -2,6 +2,10 @@ import { afterEach } from 'vitest'
 import { cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom/vitest'
 
+import { installMockFetch } from '@/api/mockFetch'
+
+installMockFetch(0)
+
 beforeAll(() => {
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
