@@ -1,5 +1,7 @@
 # Getting Started
 
+React + TypeScript file tree with drag and drop, built with Vite, Tailwind and Vitest.
+
 # Tools Used
 
 This project has been conveniently bootstrapped with [Vite](https://vitejs.dev/)
